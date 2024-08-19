@@ -3,7 +3,7 @@ import FloatingShape from "./Components/FloatingShape"
 import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import EmailVerification from "./Pages/EmailVerification"
-
+import {Toaster} from 'react-hot-toast'
 const App = () => {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-green-900 to-emerald-900">
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/verify-email" element={<EmailVerification/>}/>
       </Routes>
+      <Toaster/>
     </div>
   )
 }
