@@ -53,7 +53,7 @@ const Login = () => {
 
             {error && <p className="text-red-600 font-semibold my-1">{error}</p>}
 
-          <div className="flex items-center mt-1">
+          <div className="flex items-center mt-2">
             <Link to='/forgot-password' className="text-sm text-green-500 hover:underline">
               Forgot Password?
             </Link>
