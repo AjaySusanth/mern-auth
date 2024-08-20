@@ -8,6 +8,7 @@ import { useAuthStore } from "./Store/authStore"
 import { useEffect } from "react"
 import Home from "./Pages/Home"
 import LoadingSpinner from "./Components/LoadingSpinner"
+import ForgotPassword from "./Pages/ForgotPassword"
 
 // Protect routes that require authentication
 
@@ -36,7 +37,7 @@ const RedirectAuthenticatedUser = ({children}) => {
 }
 const App = () => {
 
-  const {isCheckingAuth,isAuthenticated,checkAuth,user} = useAuthStore()
+  const {isCheckingAuth,checkAuth} = useAuthStore()
 
   useEffect(()=>{
     checkAuth()
@@ -63,6 +64,9 @@ const App = () => {
           <Login/>
         </RedirectAuthenticatedUser>}/>
         <Route path="/verify-email" element={<EmailVerification/>}/>
+        <Route path="/forgot-password" element={<RedirectAuthenticatedUser>
+          <ForgotPassword/>
+        </RedirectAuthenticatedUser>}/>
       </Routes>
       <Toaster/>
     </div>

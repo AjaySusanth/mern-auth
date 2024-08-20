@@ -67,6 +67,17 @@ export const useAuthStore =  create((set)=>({
             set({error:'Error logging out', isLoading:false})
             throw error 
         }
+    },
+
+    forgotPassword : async(email) =>{
+        set({isLoading:true,error:null,message:null})
+        try {
+            const res = await axios.post(`${API_URL}/forgot-password`,{email})
+            set({message:res.data.message,isLoading:false})
+        } catch (error) {
+            set({message:res.data.message || 'Error sending password reset mail',isLoading:false})
+            throw error
+        }
     }
 }))
 
