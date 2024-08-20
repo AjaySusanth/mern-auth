@@ -10,6 +10,7 @@ export const useAuthStore =  create((set)=>({
     error:null,
     isLoading:false,
     isCheckingAuth:true,
+    message:null,
 
     signup: async(email,password,name) =>{
         set({isLoading:true,error:null})
@@ -75,9 +76,22 @@ export const useAuthStore =  create((set)=>({
             const res = await axios.post(`${API_URL}/forgot-password`,{email})
             set({message:res.data.message,isLoading:false})
         } catch (error) {
-            set({message:res.data.message || 'Error sending password reset mail',isLoading:false})
+            set({message:error.response.data.message || 'Error sending password reset mail',isLoading:false})
             throw error
         }
+    },
+    
+    resetPassword: async (token,password) => {
+        set({isLoading:true,error:null})
+
+        try {
+            const res = await axios.post(`${API_URL}/reset-password/${token}`,{password})
+            set({message:res.data.message,isLoading:false})
+        } catch (error) {
+            set({message:error.response.data.message || 'Error in resetting password',isLoading:false})
+            throw error
+        }
+        
     }
 }))
 
