@@ -33,6 +33,28 @@ export const useAuthStore =  create((set)=>({
             set({error:error.response.data.message || 'Unexpected error occured', isLoading:false})
             throw error 
         }
+    },
+
+    checkAuth: async()=>{
+        set({isCheckingAuth:true})
+        try {
+            const res = await axios.get(`${API_URL}/check-auth`)
+            set({user:res.data.user,isAuthenticated:true,isCheckingAuth:false})
+        } catch (error) {
+            set({error:null,isCheckingAuth:false})
+        }
+    },
+
+    login: async(email,password)=>{
+        set({isLoading:true,error:null})
+        try {
+            const res = await axios.post(`${API_URL}/login`,{email,password})
+            set({user:res.data.user,isLoading:false,isAuthenticated:true})
+            
+        } catch (error) {
+            set({error:error.response.data.message || 'Unexpected error occured', isLoading:false})
+            throw error 
+        }
     }
 }))
 
